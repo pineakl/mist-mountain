@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MoveCommand : ICommand
 {
-    Rigidbody _unitBody;
-    Vector3 _moveDir;
+    private Rigidbody _unitBody;
+    private Vector3 _moveDir;
 
     /// <summary>
     /// Create a move command with target rigidbody and desired velocity.
@@ -21,6 +21,7 @@ public class MoveCommand : ICommand
 
     public void Execute()
     {
-        _unitBody.velocity = _moveDir;
+        Vector3 worldVelocity = _unitBody.transform.TransformDirection(_moveDir);
+        _unitBody.transform.position += worldVelocity * Time.deltaTime;
     }
 }

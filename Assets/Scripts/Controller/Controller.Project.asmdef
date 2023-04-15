@@ -1,9 +1,9 @@
 {
-    "name": "Movement.Project",
+    "name": "Controller.Project",
     "rootNamespace": "",
     "references": [
-        "GUID:1097bcfe2f76f73b0943946913164514",
-        "GUID:69acb964af9a89e02af20f4be6c74290"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:3c878a77876ccf2e2be1eb6624e926c0"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

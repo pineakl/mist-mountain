@@ -15,7 +15,7 @@ public class ActionInvoker
     /// </summary>
     public void AddCommand(ICommand command)
     {
-        _commandList.Push(command);
+        //_commandList.Push(command);
         command.Execute();
     }
 }
