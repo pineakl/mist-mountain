@@ -44,7 +44,7 @@ public class Controller : MonoBehaviour
         _moveDir = Vector2.zero;
     }
 
-    public Vector2 getMoveDir()
+    public Vector2 getDir()
     {
         return _moveDir;
     }

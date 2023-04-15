@@ -441,7 +441,7 @@ Animator:
   m_GameObject: {fileID: 1316682645}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a8e2e59da3c786cea39e32da8fe8bf6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -494,7 +494,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -937968743, guid: 71d7be892cc339ce987ad31ed5531e6a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.5, y: 1.375}
@@ -603,6 +603,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 799846e51b425f1209e6ef46fb25be40, type: 3}
   m_PrefabInstance: {fileID: 1378523106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1558079119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1558079120}
+  - component: {fileID: 1558079121}
+  m_Layer: 0
+  m_Name: ActionInvoker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1558079120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558079119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.0413146, y: 2.796589, z: -2.326643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1558079121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558079119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1702d5b0f394e7418c784063d5a80cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1685882281
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +691,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6c0b18ae9e33dedae251930ceb4d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1712237510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1712237511}
+  m_Layer: 0
+  m_Name: ---------- Queue ----------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1712237511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712237510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906711154
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +733,7 @@ GameObject:
   - component: {fileID: 1906711155}
   - component: {fileID: 1906711156}
   - component: {fileID: 1906711157}
+  - component: {fileID: 1906711158}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -709,7 +785,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88c4d7d32cba593bb563a1f09911996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _invoker: {fileID: 1558079121}
   _commandInput: {fileID: 1685882283}
+--- !u!114 &1906711158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906711154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ae97b58ca01237086a0dcd8e977905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _invoker: {fileID: 1558079121}
+  _commandInput: {fileID: 1685882283}
+  _animator: {fileID: 1316682647}
 --- !u!1001 &2012638201
 PrefabInstance:
   m_ObjectHideFlags: 0
