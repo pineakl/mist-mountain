@@ -29,21 +29,29 @@ public class AnimationInput : MonoBehaviour
 
     private void Update()
     {
-        if (_commandInput.getDir() != _lastFrameVelocity)
+        if (_commandInput.GetDir() != _lastFrameVelocity)
         {
-            int state = getState(_commandInput.getDir());
-            if (_commandInput.getDir().x < 0)
+            int state = getState(_commandInput.GetDir());
+            if (_commandInput.GetDir().x < 0)
             {
                 _lastFlip = true;
             }
-            else if (_commandInput.getDir().x > 0)
+            else if (_commandInput.GetDir().x > 0)
             {
                 _lastFlip = false;
             }
             ICommand storedAnimationCommand = new AnimationCommand(_animator, state, _lastFlip);
             _invoker.AddCommand(storedAnimationCommand);
         }
-        _lastFrameVelocity = _commandInput.getDir();
+        _lastFrameVelocity = _commandInput.GetDir();
+    }
+
+    private void FixedUpdate() 
+    {
+        Vector2 unitPosition = new Vector2(transform.position.x, transform.position.z);
+        Vector2 facing = _commandInput.GetAim() - unitPosition;
+        float angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
+        Debug.Log(angle);
     }
 
     private int getState(Vector2 inputDir)

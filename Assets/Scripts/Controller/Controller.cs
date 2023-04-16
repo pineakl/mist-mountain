@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
 {
-    private Rigidbody _controlledBody;
     private UserInput _input = null;
     private Vector2 _moveDir;
+    private Plane _downPlane;
+    private Vector3 _mousePosition;
 
     private void Awake() 
     {
@@ -14,22 +15,30 @@ public class Controller : MonoBehaviour
     }
 
     private void Start()
-    {}
+    {
+        _downPlane = new Plane(Vector3.down, 0);
+    }
 
     // Subscribe to Unity new input system
     private void OnEnable() 
     {
         _input.Enable();
+        
         _input.Player.Movement.performed += onMovementPerformed;
         _input.Player.Movement.canceled += onMovementCanceled;
+
+        _input.Player.Mouse.performed += onMousePosition;
     }
 
     // Unsubscribe Unity new input system
     private void OnDisable() 
     {
         _input.Disable();
+        
         _input.Player.Movement.performed -= onMovementPerformed;
         _input.Player.Movement.canceled -= onMovementCanceled;
+
+        _input.Player.Mouse.performed -= onMousePosition;
     }
 
     // Read value from input system
@@ -44,8 +53,24 @@ public class Controller : MonoBehaviour
         _moveDir = Vector2.zero;
     }
 
-    public Vector2 getDir()
+    private void onMousePosition(InputAction.CallbackContext value)
+    {
+        Vector3 mousePositionWithDepth = new Vector3(value.ReadValue<Vector2>().x, value.ReadValue<Vector2>().y, Camera.main.nearClipPlane);
+        Ray ray = Camera.main.ScreenPointToRay(mousePositionWithDepth);
+        if (_downPlane.Raycast(ray, out float distance))
+        {
+            _mousePosition = ray.GetPoint(distance);
+        }
+    }
+
+    public Vector2 GetDir()
     {
         return _moveDir;
+    }
+
+    public Vector2 GetAim()
+    {
+        Vector2 mousePosition2D = new Vector2(_mousePosition.x, _mousePosition.z);
+        return mousePosition2D;
     }
 }

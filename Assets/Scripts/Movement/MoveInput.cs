@@ -14,7 +14,7 @@ public class MoveInput : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        ICommand storedMoveCommand = new MoveCommand(_controlledBody, _commandInput.getDir());
+        ICommand storedMoveCommand = new MoveCommand(_controlledBody, _commandInput.GetDir());
         _invoker.AddCommand(storedMoveCommand);
     }
 }
