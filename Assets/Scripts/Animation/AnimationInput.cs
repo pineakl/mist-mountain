@@ -17,52 +17,71 @@ public class AnimationInput : MonoBehaviour
     private static readonly int WalkFront = Animator.StringToHash("walk-front");
     private static readonly int WalkSide = Animator.StringToHash("walk-side");
     private static readonly int WalkSideBack = Animator.StringToHash("walk-side-back");
-    private static readonly int WalkSideFront = Animator.StringToHash("walk-front-front");
+    private static readonly int WalkSideFront = Animator.StringToHash("walk-side-front");
     private static readonly int ShootBack = Animator.StringToHash("shoot-back");
     private static readonly int ShootFront = Animator.StringToHash("shoot-front");
     private static readonly int ShootSide = Animator.StringToHash("shoot-side");
     private static readonly int ShootSideBack = Animator.StringToHash("shoot-side-back");
     private static readonly int ShootSideFront = Animator.StringToHash("shoot-front-front");
 
-    private Vector2 _lastFrameVelocity;
+    private int _lastAnimation;
     private bool _lastFlip;
 
     private void Update()
     {
-        if (_commandInput.GetDir() != _lastFrameVelocity)
+        int state = getState(_commandInput.GetDir());
+        
+        if (state != _lastAnimation)
         {
-            int state = getState(_commandInput.GetDir());
-            if (_commandInput.GetDir().x < 0)
-            {
-                _lastFlip = true;
-            }
-            else if (_commandInput.GetDir().x > 0)
-            {
-                _lastFlip = false;
-            }
+            _lastAnimation = state;
             ICommand storedAnimationCommand = new AnimationCommand(_animator, state, _lastFlip);
             _invoker.AddCommand(storedAnimationCommand);
         }
-        _lastFrameVelocity = _commandInput.GetDir();
-    }
-
-    private void FixedUpdate() 
-    {
-        Vector2 unitPosition = new Vector2(transform.position.x, transform.position.z);
-        Vector2 facing = _commandInput.GetAim() - unitPosition;
-        float angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
     }
 
     private int getState(Vector2 inputDir)
     {
-        if (inputDir == Vector2.zero)
+        //  shoot
+        
+        //  walk
+        if (inputDir != Vector2.zero)
         {
-            return ReadySideBack;
+            if (inputDir.x < 0) _lastFlip = true;
+            else if (inputDir.x > 0) _lastFlip = false;
+
+            if (inputDir.y == 1) return WalkBack;
+            else if (inputDir.y == 0) return WalkSide;
+            else if (inputDir.y == -1) return WalkFront;
+            else if (inputDir.y > 0 && inputDir.y < 1) return WalkSideBack;
+            else if (inputDir.y < 0 && inputDir.y > -1) return WalkSideFront;
         }
-        else
-        {
-            return WalkSideBack;
-        }
+
+        //  ready
+        float facingAngle = getFacingAngle();
+        if (facingAngle >= -67.5 && facingAngle < -22.5) { _lastFlip = false; return ReadyFront; }
+        else if (facingAngle >= -22.5 && facingAngle < 22.5) { _lastFlip = false; return ReadySideFront; }
+        else if (facingAngle >= 22.5 && facingAngle < 67.5) { _lastFlip = false; return ReadySide; }
+        else if (facingAngle >= 67.5 && facingAngle < 112.5) { _lastFlip = false; return ReadySideBack; }
+        else if (facingAngle >= 112.5 && facingAngle < 157.5) { _lastFlip = false; return ReadyBack; }
+
+        else if (facingAngle >= -112.5 && facingAngle < -67.5) { _lastFlip = true; return ReadySideFront; }
+        else if (facingAngle >= -157.5 && facingAngle < -112.5) { _lastFlip = true; return ReadySide; }
+        else if (facingAngle >= 157.5 || facingAngle < -157.5) { _lastFlip = true; return ReadySideBack; }
+
+        return ReadyFront;
+    }
+
+    private float getFacingAngle()
+    {
+        Vector2 unitPosition = new Vector2(transform.position.x, transform.position.z);
+        Vector2 facing = _commandInput.GetAim() - unitPosition;
+        float angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
+        return angle;
+    }
+
+    private int returnSaveAnimation(int animationHash)
+    {
+        _lastAnimation = animationHash;
+        return animationHash;
     }
 }

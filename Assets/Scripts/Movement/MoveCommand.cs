@@ -22,6 +22,6 @@ public class MoveCommand : ICommand
     public void Execute()
     {
         Vector3 worldVelocity = _unitBody.transform.TransformDirection(_moveDir);
-        _unitBody.transform.position += worldVelocity * Time.deltaTime;
+        _unitBody.transform.position += worldVelocity * 2 * Time.deltaTime;
     }
 }
