@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 242825462}
   - component: {fileID: 242825461}
   - component: {fileID: 242825460}
+  - component: {fileID: 242825464}
   m_Layer: 0
   m_Name: Mob1
   m_TagString: Untagged
@@ -346,6 +347,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!114 &242825464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242825459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba87cd112373b5a2b2268d76e1daabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 738225462}
+  _flashMaterial: {fileID: 2100000, guid: 131720d3f4f7a7b2592945050532f095, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
