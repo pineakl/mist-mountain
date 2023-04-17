@@ -1,0 +1,17 @@
+{
+    "name": "Shoot.Project",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1097bcfe2f76f73b0943946913164514",
+        "GUID:69acb964af9a89e02af20f4be6c74290"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

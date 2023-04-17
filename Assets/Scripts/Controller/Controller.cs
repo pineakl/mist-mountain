@@ -8,6 +8,7 @@ public class Controller : MonoBehaviour
     private Vector2 _moveDir;
     private Plane _downPlane;
     private Vector3 _mousePosition;
+    private bool _mouseClick;
 
     private void Awake() 
     {
@@ -28,6 +29,8 @@ public class Controller : MonoBehaviour
         _input.Player.Movement.canceled += onMovementCanceled;
 
         _input.Player.Mouse.performed += onMousePosition;
+
+        _input.Player.MouseClick.performed += onMouseLeftClick;
     }
 
     // Unsubscribe Unity new input system
@@ -39,6 +42,8 @@ public class Controller : MonoBehaviour
         _input.Player.Movement.canceled -= onMovementCanceled;
 
         _input.Player.Mouse.performed -= onMousePosition;
+
+        _input.Player.MouseClick.performed -= onMouseLeftClick;
     }
 
     // Read value from input system
@@ -63,6 +68,11 @@ public class Controller : MonoBehaviour
         }
     }
 
+    private void onMouseLeftClick(InputAction.CallbackContext data)
+    {
+        _mouseClick = true;
+    }
+
     public Vector2 GetDir()
     {
         return _moveDir;
@@ -72,5 +82,16 @@ public class Controller : MonoBehaviour
     {
         Vector2 mousePosition2D = new Vector2(_mousePosition.x, _mousePosition.z);
         return mousePosition2D;
+    }
+
+    public bool GetFire()
+    {
+        if (_mouseClick)
+        {
+            _mouseClick = false;
+            return true;
+        }
+
+        return false;
     }
 }
