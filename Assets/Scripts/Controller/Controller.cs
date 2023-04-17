@@ -46,6 +46,11 @@ public class Controller : MonoBehaviour
         _input.Player.MouseClick.performed -= onMouseLeftClick;
     }
 
+    private void LateUpdate() 
+    {
+        if (_mouseClick) _mouseClick = false;
+    }
+
     // Read value from input system
     private void onMovementPerformed(InputAction.CallbackContext value)
     {
@@ -86,12 +91,6 @@ public class Controller : MonoBehaviour
 
     public bool GetFire()
     {
-        if (_mouseClick)
-        {
-            _mouseClick = false;
-            return true;
-        }
-
-        return false;
+        return _mouseClick;
     }
 }

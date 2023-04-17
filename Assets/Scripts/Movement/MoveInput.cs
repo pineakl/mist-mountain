@@ -1,11 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
 public class MoveInput : MonoBehaviour
 {
     [SerializeField] private Invoker _invoker;
     [SerializeField] private Controller _commandInput;
     private Rigidbody _controlledBody;
+    private bool _stopping;
 
     private void Start() 
     {
@@ -14,7 +15,25 @@ public class MoveInput : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        ICommand storedMoveCommand = new MoveCommand(_controlledBody, _commandInput.GetDir());
+        Vector2 moveVelocity = _commandInput.GetDir();
+        if (_stopping) moveVelocity = Vector2.zero;
+
+        ICommand storedMoveCommand = new MoveCommand(_controlledBody, moveVelocity);
         _invoker.AddCommand(storedMoveCommand);
+    }
+
+    private void Update()
+    {
+        if (_commandInput.GetFire()) 
+        {
+            _stopping = true;
+            StartCoroutine(endStop(0.2f));
+        }
+    }
+
+    private IEnumerator endStop(float second)
+    {
+        yield return new WaitForSeconds(second);
+        _stopping = false;
     }
 }
