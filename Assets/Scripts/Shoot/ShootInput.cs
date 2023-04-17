@@ -16,7 +16,7 @@ public class ShootInput : MonoBehaviour
         {
             Vector3 shootPosition = _shootOrigin.transform.position;
             Vector3 aimPosition = new Vector3(_commandInput.GetAim().x, _shootOrigin.transform.position.y, _commandInput.GetAim().y);
-            Ray ray = new Ray(shootPosition, aimPosition);
+            Ray ray = new Ray(shootPosition, (aimPosition - shootPosition).normalized);
             
             if (Physics.Raycast(ray, out _hit))
             {
