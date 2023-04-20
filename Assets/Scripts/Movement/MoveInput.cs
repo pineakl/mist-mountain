@@ -4,7 +4,7 @@ using UnityEngine;
 public class MoveInput : MonoBehaviour
 {
     [SerializeField] private Invoker _invoker;
-    [SerializeField] private Controller _commandInput;
+    [SerializeField] private AbstractController _commandInput;
     private Rigidbody _controlledBody;
     private bool _stopping;
 

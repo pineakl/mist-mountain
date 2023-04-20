@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShootInput : MonoBehaviour
 {
     [SerializeField] private Invoker _invoker;
-    [SerializeField] private Controller _commandInput;
+    [SerializeField] private AbstractController _commandInput;
     [SerializeField] private BoxCollider _shootOrigin;
 
     private RaycastHit _hit;

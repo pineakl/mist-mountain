@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationInput : MonoBehaviour
 {
     [SerializeField] private Invoker _invoker;
-    [SerializeField] private Controller _commandInput;
+    [SerializeField] private AbstractController _commandInput;
     [SerializeField] private Animator _animator;
 
     private static readonly int ReadyBack = Animator.StringToHash("ready-back");

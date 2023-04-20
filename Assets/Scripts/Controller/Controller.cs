@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Controller : MonoBehaviour
+public class Controller : AbstractController
 {
     private UserInput _input = null;
     private Vector2 _moveDir;
@@ -78,18 +78,18 @@ public class Controller : MonoBehaviour
         _mouseClick = true;
     }
 
-    public Vector2 GetDir()
+    public override Vector2 GetDir()
     {
         return _moveDir;
     }
 
-    public Vector2 GetAim()
+    public override Vector2 GetAim()
     {
         Vector2 mousePosition2D = new Vector2(_mousePosition.x, _mousePosition.z);
         return mousePosition2D;
     }
 
-    public bool GetFire()
+    public override bool GetFire()
     {
         return _mouseClick;
     }
