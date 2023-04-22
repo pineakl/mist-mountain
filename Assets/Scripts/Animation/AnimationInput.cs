@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AnimationInput : MonoBehaviour
 {
-    [SerializeField] private Invoker _invoker;
     [SerializeField] private AbstractController _commandInput;
     [SerializeField] private Animator _animator;
+
+    private Invoker _invoker;
 
     private static readonly int ReadyBack = Animator.StringToHash("ready-back");
     private static readonly int ReadyFront = Animator.StringToHash("ready-front");
@@ -27,6 +28,13 @@ public class AnimationInput : MonoBehaviour
     private int _lastAnimation;
     private bool _onShooting;
     private bool _lastFlip;
+
+
+
+    private void Start()
+    {
+        _invoker = Invoker.Instance;
+    }
 
     private void Update()
     {

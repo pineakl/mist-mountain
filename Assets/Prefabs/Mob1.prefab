@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 7383803489319153986}
   - component: {fileID: 7383803489319153987}
   - component: {fileID: 7383803489319153999}
+  - component: {fileID: 2957985487184468699}
   m_Layer: 0
   m_Name: Mob1
   m_TagString: Untagged
@@ -105,13 +106,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7383803489319153988}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e88c4d7d32cba593bb563a1f09911996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _invoker: {fileID: 0}
-  _commandInput: {fileID: 0}
+  _commandInput: {fileID: 2957985487184468699}
 --- !u!114 &7383803489319153987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,13 +120,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7383803489319153988}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65ae97b58ca01237086a0dcd8e977905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _invoker: {fileID: 0}
-  _commandInput: {fileID: 0}
+  _commandInput: {fileID: 2957985487184468699}
   _animator: {fileID: 7383803489892246658}
 --- !u!114 &7383803489319153999
 MonoBehaviour:
@@ -141,6 +142,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7383803489892246657}
   _flashMaterial: {fileID: 2100000, guid: 131720d3f4f7a7b2592945050532f095, type: 2}
+--- !u!114 &2957985487184468699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383803489319153988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8bfa5bcbef8fc54b8383f7722c82436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7383803489892246659
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +247,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7383803489892246659}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 47d9861c9e5338048bb37a37ad0ec640, type: 2}
   m_CullingMode: 0

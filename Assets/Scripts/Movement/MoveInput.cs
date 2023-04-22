@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 public class MoveInput : MonoBehaviour
 {
-    [SerializeField] private Invoker _invoker;
     [SerializeField] private AbstractController _commandInput;
     private Rigidbody _controlledBody;
     private bool _stopping;
 
+    private Invoker _invoker;
+
     private void Start() 
     {
+        _invoker = Invoker.Instance;
         _controlledBody = gameObject.GetComponent<Rigidbody>();
     }
 

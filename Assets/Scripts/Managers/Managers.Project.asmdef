@@ -1,7 +1,9 @@
 {
     "name": "Managers.Project",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:1097bcfe2f76f73b0943946913164514"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

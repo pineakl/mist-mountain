@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class ShootInput : MonoBehaviour
 {
-    [SerializeField] private Invoker _invoker;
     [SerializeField] private AbstractController _commandInput;
     [SerializeField] private BoxCollider _shootOrigin;
 
+    private Invoker _invoker;
+
     private RaycastHit _hit;
+
+    private void Start()
+    {
+        _invoker = Invoker.Instance;
+    }
 
     private void Update()
     {

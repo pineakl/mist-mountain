@@ -7,6 +7,8 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private int _maxInPool;
     [SerializeField] private GameObject _enemyPrefab;
 
+    private Invoker _invoker;
+
     private Transform[] _enemies;
     private int _alive = 0;
     private int _spawnPtr = 0;
@@ -14,7 +16,9 @@ public class EnemyPool : MonoBehaviour
 
     private void Start()
     {
-        //  Create enemes then add them to the object pool
+        _invoker = Invoker.Instance;
+
+        //  Create enemies then add them to the object pool
         _enemies = new Transform[_maxInPool];
         for (int i = 0; i < _maxInPool; i++)
         {
@@ -44,6 +48,8 @@ public class EnemyPool : MonoBehaviour
                     _spawnPtr = (_spawnPtr + 1) % _maxInPool;
                     _alive++;
                     spawned = true;
+
+                    //  Create Spawn Command!
                 }
                 else
                 {
