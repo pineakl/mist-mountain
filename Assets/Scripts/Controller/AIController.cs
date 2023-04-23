@@ -8,24 +8,64 @@ public class AIController : AbstractController
     private Vector2 _moveDir;
     private Vector2 _lookDir;
     private bool _hit;
+    private System.Random _rand;
     
     private enum State
     {
         Idle,
-        Moving,
+        Roaming,
+        Charge,
         Attack
     }
 
     private State _currentState;
 
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
-        _currentState = State.Moving;
+        _rand = new System.Random();
+    }
+
+    private void OnEnable()
+    {
+        _currentState = State.Roaming;
+        InvokeRepeating("RandomizeState", 0, 1f);
+    }
+
+    private void OnDisable()
+    {
+        if (IsInvoking("RandomizeState")) CancelInvoke("RandomizeState");
+    }
+
+    private void RandomizeState()
+    {
+        int rng = _rand.Next(0, 5);
+        Debug.Log(rng);
+        if (rng > 0)
+        {
+            _currentState = State.Roaming;
+            switch (rng)
+            {
+                case 1:
+                    _moveDir = new Vector2(1, 0);
+                    break;
+
+                case 2:
+                    _moveDir = new Vector2(-1, 0);
+                    break;
+
+                case 3:
+                    _moveDir = new Vector2(0, 1);
+                    break;
+
+                case 4:
+                    _moveDir = new Vector2(0, -1);
+                    break;
+            }
+        }
+        else
+        {
+            _currentState = State.Idle;
+        }
     }
 
     private void Update()
@@ -36,8 +76,12 @@ public class AIController : AbstractController
                 makeIdle();
                 break;
 
-            case State.Moving:
+            case State.Roaming:
                 makeMove();
+                break;
+
+            case State.Charge:
+                makeCharge();
                 break;
 
             case State.Attack:
@@ -52,9 +96,15 @@ public class AIController : AbstractController
 
     private void makeMove()
     {
-        _moveDir = new Vector2(1, 0);
-
         _lookDir = _moveDir;
+    }
+
+    private void makeCharge()
+    {
+        Vector2 thisPos = new Vector2(transform.position.x, transform.position.z);
+        Vector2 chargeDir = (Vector2.zero - thisPos).normalized;
+
+        _moveDir = chargeDir;
     }
 
     public override Vector2 GetDir()

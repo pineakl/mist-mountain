@@ -7,12 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _player;
     [SerializeField] private EnemyPool _enemyPool;
 
-    private System.Random _rand;
-
     private void Start() 
     {
-        _rand = new System.Random();
-
         //  Start spawning enemy every x seconds.
         InvokeRepeating("spawn", 3f, 3f);
     }
@@ -24,11 +20,17 @@ public class GameManager : MonoBehaviour
 
     private void spawn()
     {
-        float halfWide = 10;
+        Vector2 playerPosition = new Vector2(_player.position.x, _player.position.z);
+        float clean = 10f;
+        float radius = 15f;
+        Vector2 randCircle = Random.insideUnitCircle * radius;
         Vector2 spawnPosition = new Vector2(
-            (float)_rand.Next((int)(_player.position.x - halfWide), (int)(_player.position.x + halfWide)),
-            (float)_rand.Next((int)(_player.position.y - halfWide), (int)(_player.position.y + halfWide))
+            _player.position.x + randCircle.x,
+            _player.position.z + randCircle.y
         );
-        _enemyPool.Spawn(spawnPosition);
+        Vector2 cleanNormal = (spawnPosition - playerPosition).normalized;
+        Vector2 spawnPositionOutside = spawnPosition + (cleanNormal * clean);
+
+        _enemyPool.Spawn(spawnPositionOutside);
     }
 }

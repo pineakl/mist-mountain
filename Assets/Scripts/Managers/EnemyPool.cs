@@ -35,7 +35,6 @@ public class EnemyPool : MonoBehaviour
     /// </summary>
     public void Spawn(Vector2 position)
     {
-        Debug.Log("Spawn This");
         if (_alive < _maxInPool)
         {
             bool spawned = false;
