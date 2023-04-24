@@ -4,6 +4,8 @@ using UnityEngine;
 public class MoveInput : MonoBehaviour
 {
     [SerializeField] private AbstractController _commandInput;
+    [SerializeField] private float _speed;
+
     private Rigidbody _controlledBody;
     private bool _stopping;
 
@@ -18,9 +20,10 @@ public class MoveInput : MonoBehaviour
     private void FixedUpdate() 
     {
         Vector2 moveVelocity = _commandInput.GetDir();
+        bool isometric = _commandInput.GetIsometric();
         if (_stopping) moveVelocity = Vector2.zero;
 
-        ICommand storedMoveCommand = new MoveCommand(_controlledBody, moveVelocity);
+        ICommand storedMoveCommand = new MoveCommand(_controlledBody, moveVelocity, _speed, isometric);
         _invoker.AddCommand(storedMoveCommand);
     }
 

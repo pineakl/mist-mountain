@@ -45,6 +45,13 @@ public class Controller : AbstractController
 
         _input.Player.MouseClick.performed -= onMouseLeftClick;
     }
+    private void Update()
+    {
+        if (!GameManager.Instance.IsPlayerAlive())
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void LateUpdate() 
     {
@@ -92,5 +99,10 @@ public class Controller : AbstractController
     public override bool GetFire()
     {
         return _mouseClick;
+    }
+
+    public override bool GetIsometric()
+    {
+        return true;
     }
 }

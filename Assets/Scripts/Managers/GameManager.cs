@@ -5,24 +5,34 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform _player;
-    [SerializeField] private EnemyPool _enemyPool;
+    
+    private static GameManager _instance;
+
+    private bool _playerIsAlive;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    public static GameManager Instance
+    {
+        get { return _instance; }
+    }
 
     private void Start() 
     {
+        _playerIsAlive = true;
+
         //  Start spawning enemy every x seconds.
         InvokeRepeating("spawn", 3f, 3f);
-    }
-
-    private void Update() 
-    {
-
     }
 
     private void spawn()
     {
         Vector2 playerPosition = new Vector2(_player.position.x, _player.position.z);
-        float clean = 10f;
-        float radius = 15f;
+        float clean = 20f;
+        float radius = 5f;
         Vector2 randCircle = Random.insideUnitCircle * radius;
         Vector2 spawnPosition = new Vector2(
             _player.position.x + randCircle.x,
@@ -31,6 +41,21 @@ public class GameManager : MonoBehaviour
         Vector2 cleanNormal = (spawnPosition - playerPosition).normalized;
         Vector2 spawnPositionOutside = spawnPosition + (cleanNormal * clean);
 
-        _enemyPool.Spawn(spawnPositionOutside);
+        EnemyPool.Instance.Spawn(spawnPositionOutside);
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return _player.transform;
+    }
+
+    public bool IsPlayerAlive()
+    {
+        return _playerIsAlive;
+    }
+
+    public void SetPlayerDead()
+    {
+        _playerIsAlive = false;
     }
 }

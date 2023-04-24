@@ -6,13 +6,25 @@ public class EnemyPool : MonoBehaviour
 {
     [SerializeField] private int _maxInPool;
     [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private Transform _playerTransform;
+
+    private static EnemyPool _instance;
 
     private Invoker _invoker;
 
     private Transform[] _enemies;
     private int _alive = 0;
     private int _spawnPtr = 0;
-    private int _total;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    public static EnemyPool Instance
+    {
+        get { return _instance; }
+    }
 
     private void Start()
     {
@@ -56,9 +68,11 @@ public class EnemyPool : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("All available enemy has spawned!");
-        }
+    }
+
+    public void DeSpawn(Transform enemyTransform)
+    {
+        enemyTransform.gameObject.SetActive(false);
+        _alive--;
     }
 }

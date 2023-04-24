@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7383803489314330219}
-  - component: {fileID: 7383803489314330218}
+  - component: {fileID: 133496094842004458}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -32,8 +32,8 @@ Transform:
   m_Father: {fileID: 7383803489319153984}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7383803489314330218
-BoxCollider:
+--- !u!135 &133496094842004458
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 1, z: 1.2}
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7383803489319153988
 GameObject:
@@ -55,13 +55,15 @@ GameObject:
   m_Component:
   - component: {fileID: 7383803489319153984}
   - component: {fileID: 7383803489319153985}
+  - component: {fileID: -6429411483635990469}
   - component: {fileID: 7383803489319153986}
   - component: {fileID: 7383803489319153987}
   - component: {fileID: 7383803489319153999}
   - component: {fileID: 2957985487184468699}
+  - component: {fileID: 8350537780022064836}
   m_Layer: 0
   m_Name: Mob1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +101,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6429411483635990469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383803489319153988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239d6206db9df004688ed80ccfefddaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitDataObject: {fileID: 11400000, guid: 121dcc7d94a6f6b4c8f6cb6ece9b215d, type: 2}
 --- !u!114 &7383803489319153986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88c4d7d32cba593bb563a1f09911996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invoker: {fileID: 0}
   _commandInput: {fileID: 2957985487184468699}
+  _speed: 3
 --- !u!114 &7383803489319153987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ae97b58ca01237086a0dcd8e977905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invoker: {fileID: 0}
   _commandInput: {fileID: 2957985487184468699}
   _animator: {fileID: 7383803489892246658}
 --- !u!114 &7383803489319153999
@@ -154,6 +168,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bfa5bcbef8fc54b8383f7722c82436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetData: {fileID: 11400000, guid: 4772cfcc5ee872345958971fcef53f6f, type: 2}
+  _selfData: {fileID: -6429411483635990469}
+--- !u!114 &8350537780022064836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383803489319153988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f515aa9cdbb8dcd4a91e0312b2dae6b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandInput: {fileID: 2957985487184468699}
+  _targetData: {fileID: 11400000, guid: 4772cfcc5ee872345958971fcef53f6f, type: 2}
 --- !u!1 &7383803489892246659
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,14 +209,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7383803489892246659}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7383803489319153984}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!212 &7383803489892246657
 SpriteRenderer:
   m_ObjectHideFlags: 0
