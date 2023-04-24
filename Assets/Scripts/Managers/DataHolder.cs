@@ -70,7 +70,8 @@ public class DataHolder : MonoBehaviour
                 if (!DeathFlag)
                 {
                     DeathFlag = true;
-                    Invoke("BeginDeSpawn", 0.5f);
+                    GameManager.Instance.AddScore(50);
+                    Invoke("BeginDeSpawn", 0.2f);
                 }
             }
         }
@@ -83,6 +84,7 @@ public class DataHolder : MonoBehaviour
 
     private void BeginGameOver()
     {
+        Debug.Log("Dead");
         GameManager.Instance.SetPlayerDead();
     }
 }

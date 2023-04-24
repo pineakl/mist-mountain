@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     private bool _playerIsAlive;
+    private int _scores;
 
     private void Awake()
     {
@@ -57,5 +58,15 @@ public class GameManager : MonoBehaviour
     public void SetPlayerDead()
     {
         _playerIsAlive = false;
+    }
+
+    public int GetScores()
+    {
+        return _scores;
+    }
+
+    public void AddScore(int score)
+    {
+        _scores += score;
     }
 }
