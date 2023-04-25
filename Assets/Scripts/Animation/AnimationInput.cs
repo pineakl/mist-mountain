@@ -38,7 +38,7 @@ public class AnimationInput : MonoBehaviour
 
     private void Update()
     {
-        int state = getState(_commandInput.GetDir());
+        int state = GetState(_commandInput.GetDir());
         
         if (state != _lastAnimation)
         {
@@ -53,10 +53,13 @@ public class AnimationInput : MonoBehaviour
         }
     }
 
-    private int getState(Vector2 inputDir)
+    /// <summary>
+    /// Get animation state based on movement velocity
+    /// </summary>
+    private int GetState(Vector2 inputDir)
     {
         //  shoot
-        float facingAngle = getFacingAngle();
+        float facingAngle = GetFacingAngle();
         if (_commandInput.GetFire())
         {
             _onShooting = true;
@@ -101,7 +104,10 @@ public class AnimationInput : MonoBehaviour
         return _lastAnimation;
     }
 
-    private float getFacingAngle()
+    /// <summary>
+    /// Get facing angle based on mouse input
+    /// </summary>
+    private float GetFacingAngle()
     {
         Vector2 unitPosition = new Vector2(transform.position.x, transform.position.z);
         Vector2 facing = _commandInput.GetAim() - unitPosition;

@@ -12,6 +12,7 @@ public class AIController : AbstractController
     private bool _isometric;
     private bool _hitWindow;
     private bool _hit;
+    private bool _charge;
     private System.Random _rand;
 
     private Vector2 _thisPos;
@@ -88,32 +89,42 @@ public class AIController : AbstractController
         switch (_currentState)
         {
             case State.Approach:
-                makeApproach();
+                MakeApproach();
                 break;
 
             case State.Idle:
-                makeIdle();
+                MakeIdle();
                 break;
 
             case State.Roaming:
-                makeMove();
+                MakeMove();
                 break;
 
             case State.Charge:
-                makeCharge();
+                MakeCharge();
                 break;
 
             case State.Attack:
-                makeAttack();
+                MakeAttack();
                 break;
 
             case State.Flee:
-                makeFlee();
+                MakeFlee();
                 break;
 
             case State.Dying:
-                makeDying();
+                MakeDying();
                 break;
+        }
+
+        //  Charge flag for speed change
+        if (_currentState == State.Charge || _currentState == State.Flee)
+        {
+            _charge = true;
+        }
+        else
+        {
+            _charge = false;
         }
     }
 
@@ -122,7 +133,7 @@ public class AIController : AbstractController
         _hit = false;
     }
 
-    private void makeApproach()
+    private void MakeApproach()
     {
         if (_isometric) _isometric = false;
 
@@ -130,7 +141,7 @@ public class AIController : AbstractController
 
         _moveDir = approachDir;
 
-        if ((_targetPos - _thisPos).magnitude < 10f)
+        if ((_targetPos - _thisPos).magnitude < 12f)
         {
             _currentState = State.Idle;
             InvokeRepeating("RandomizeState", 0, 1f);
@@ -140,7 +151,7 @@ public class AIController : AbstractController
         CheckDyingExit();
     }
 
-    private void makeIdle()
+    private void MakeIdle()
     {
         if (!_isometric) _isometric = true;
         _moveDir = Vector2.zero;
@@ -151,7 +162,7 @@ public class AIController : AbstractController
         CheckDyingExit();
     }
 
-    private void makeMove()
+    private void MakeMove()
     {
         if (!_isometric) _isometric = true;
         _lookDir = _moveDir;
@@ -162,7 +173,7 @@ public class AIController : AbstractController
         CheckDyingExit();
     }
 
-    private void makeCharge()
+    private void MakeCharge()
     {
         if (_isometric) _isometric = false;
 
@@ -180,7 +191,7 @@ public class AIController : AbstractController
         CheckDyingExit();
     }
 
-    private void makeAttack()
+    private void MakeAttack()
     {
         _moveDir = Vector2.zero;
 
@@ -200,7 +211,7 @@ public class AIController : AbstractController
         CheckDyingExit();
     }
 
-    private void makeFlee() 
+    private void MakeFlee() 
     {
         if (_isometric) _isometric = false;
 
@@ -211,7 +222,7 @@ public class AIController : AbstractController
         CheckDyingExit();
     }
 
-    private void makeDying()
+    private void MakeDying()
     {
         _moveDir = Vector2.zero;
     }
@@ -228,7 +239,7 @@ public class AIController : AbstractController
 
     private void CheckChargeExit()
     {
-        if ((_targetPos - _thisPos).magnitude < 8f || _selfData.GetDamaged())
+        if ((_targetPos - _thisPos).magnitude < 10f || _selfData.GetDamaged())
         {
             _currentState = State.Charge;
             if (IsInvoking("RandomizeState")) CancelInvoke("RandomizeState");
@@ -268,5 +279,10 @@ public class AIController : AbstractController
     public override bool GetIsometric()
     {
         return _isometric;
+    }
+
+    public override bool GetRush()
+    {
+        return _charge;
     }
 }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <Summary>
+/// Define how main camera behave, mainly to track player position
+/// </Summary>
 public class CameraSystem : MonoBehaviour
 {
     [SerializeField] private Transform _trackingTarget;

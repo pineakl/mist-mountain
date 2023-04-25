@@ -25,12 +25,12 @@ public class Controller : AbstractController
     {
         _input.Enable();
         
-        _input.Player.Movement.performed += onMovementPerformed;
-        _input.Player.Movement.canceled += onMovementCanceled;
+        _input.Player.Movement.performed += OnMovementPerformed;
+        _input.Player.Movement.canceled += OnMovementCanceled;
 
-        _input.Player.Mouse.performed += onMousePosition;
+        _input.Player.Mouse.performed += OnMousePosition;
 
-        _input.Player.MouseClick.performed += onMouseLeftClick;
+        _input.Player.MouseClick.performed += OnMouseLeftClick;
     }
 
     // Unsubscribe Unity new input system
@@ -38,12 +38,12 @@ public class Controller : AbstractController
     {
         _input.Disable();
         
-        _input.Player.Movement.performed -= onMovementPerformed;
-        _input.Player.Movement.canceled -= onMovementCanceled;
+        _input.Player.Movement.performed -= OnMovementPerformed;
+        _input.Player.Movement.canceled -= OnMovementCanceled;
 
-        _input.Player.Mouse.performed -= onMousePosition;
+        _input.Player.Mouse.performed -= OnMousePosition;
 
-        _input.Player.MouseClick.performed -= onMouseLeftClick;
+        _input.Player.MouseClick.performed -= OnMouseLeftClick;
     }
     private void Update()
     {
@@ -58,19 +58,26 @@ public class Controller : AbstractController
         if (_mouseClick) _mouseClick = false;
     }
 
-    // Read value from input system
-    private void onMovementPerformed(InputAction.CallbackContext value)
+    /// <Summary>
+    /// Read value from input system
+    /// </Summary>
+    private void OnMovementPerformed(InputAction.CallbackContext value)
     {
         _moveDir = value.ReadValue<Vector2>();
     }
 
-    // Reset value to zero
-    private void onMovementCanceled(InputAction.CallbackContext value)
+    /// <Summary>
+    /// Reset velocity to zero when controller disabled
+    /// </Summary>
+    private void OnMovementCanceled(InputAction.CallbackContext value)
     {
         _moveDir = Vector2.zero;
     }
 
-    private void onMousePosition(InputAction.CallbackContext value)
+    /// <Summary>
+    /// Track mouse position to perform player facing angle.
+    /// </Summary>
+    private void OnMousePosition(InputAction.CallbackContext value)
     {
         Vector3 mousePositionWithDepth = new Vector3(value.ReadValue<Vector2>().x, value.ReadValue<Vector2>().y, Camera.main.nearClipPlane);
         Ray ray = Camera.main.ScreenPointToRay(mousePositionWithDepth);
@@ -80,7 +87,10 @@ public class Controller : AbstractController
         }
     }
 
-    private void onMouseLeftClick(InputAction.CallbackContext data)
+    /// <Summary>
+    /// Define one-press firing button
+    /// </Summary>
+    private void OnMouseLeftClick(InputAction.CallbackContext data)
     {
         _mouseClick = true;
     }
@@ -104,5 +114,10 @@ public class Controller : AbstractController
     public override bool GetIsometric()
     {
         return true;
+    }
+
+    public override bool GetRush()
+    {
+        return false;
     }
 }

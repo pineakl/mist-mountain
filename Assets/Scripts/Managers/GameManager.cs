@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform _player;
+    [SerializeField] private Transform _cameraBoxVolume;
     
     private static GameManager _instance;
 
@@ -26,10 +27,13 @@ public class GameManager : MonoBehaviour
         _playerIsAlive = true;
 
         //  Start spawning enemy every x seconds.
-        InvokeRepeating("spawn", 3f, 3f);
+        InvokeRepeating("Spawn", 3f, 1.5f);
     }
 
-    private void spawn()
+    /// <Summary>
+    /// Spawn enemy at random position outside player visible area
+    /// </Summary>
+    private void Spawn()
     {
         Vector2 playerPosition = new Vector2(_player.position.x, _player.position.z);
         float clean = 20f;
@@ -45,26 +49,42 @@ public class GameManager : MonoBehaviour
         EnemyPool.Instance.Spawn(spawnPositionOutside);
     }
 
+    /// <Summary>
+    /// Get player transform from static game manager
+    /// </Summary>
     public Transform GetPlayerTransform()
     {
         return _player.transform;
     }
 
+    /// <Summary>
+    /// Get player alive status
+    /// </Summary>
     public bool IsPlayerAlive()
     {
         return _playerIsAlive;
     }
 
+    /// <Summary>
+    /// Flag player death
+    /// </Summary>
     public void SetPlayerDead()
     {
+        _cameraBoxVolume.localPosition = Vector3.zero;
         _playerIsAlive = false;
     }
 
+    /// <Summary>
+    /// Get current score
+    /// </Summary>
     public int GetScores()
     {
         return _scores;
     }
 
+    /// <Summary>
+    /// Add current score by "score" value
+    /// </Summary>
     public void AddScore(int score)
     {
         _scores += score;

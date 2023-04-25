@@ -70,6 +70,9 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
+    /// <Summary>
+    /// Set enemy object inactive and store it to the pool as available
+    /// </Summary>
     public void DeSpawn(Transform enemyTransform)
     {
         enemyTransform.gameObject.SetActive(false);

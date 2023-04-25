@@ -9,9 +9,17 @@ public class Flashing : MonoBehaviour
 
     private Material _defaultMaterial;
 
+    private void OnEnable()
+    {
+        if (_defaultMaterial != null)
+        {
+            _spriteRenderer.material = _defaultMaterial;
+        }
+    }
+
     private void Start() 
     {
-        _defaultMaterial = _spriteRenderer.material;    
+        _defaultMaterial = _spriteRenderer.material;   
     }
 
     public void flash(float duration)

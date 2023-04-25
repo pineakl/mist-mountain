@@ -19,6 +19,9 @@ public class DataHolder : MonoBehaviour
         ResetValue();
     }
 
+    /// <Summary>
+    /// Reset scriptable object Health and Death value
+    /// </Summary>
     private void ResetValue()
     {
         _health = _unitDataObject.MaxHealth;
@@ -33,18 +36,27 @@ public class DataHolder : MonoBehaviour
         _unitDataObject.UnitPosition = transform.position;
     }
 
+    /// <Summary>
+    /// Decrease object health by 1
+    /// </Summary>
     public void SubstractHealth()
     {
         if (_health > 0) _health--;
         if (_unitDataObject.Mutable) _unitDataObject.Health = _health;
     }
 
+    /// <Summary>
+    /// Check if the object's health is below max health
+    /// </Summary>
     public bool GetDamaged()
     {
         if (_health < _unitDataObject.Health) return true;
         return false;
     }
 
+    /// <Summary>
+    /// Check if the object's health is only 1 point
+    /// </Summary>
     public bool GetCritical()
     {
         if (_health > 1) return false;
@@ -78,14 +90,19 @@ public class DataHolder : MonoBehaviour
         }
     }
 
+    /// <Summary>
+    /// Set enemy object inactive and store it to the pool as available
+    /// </Summary>
     private void BeginDeSpawn()
     {
         EnemyPool.Instance.DeSpawn(transform);
     }
 
+    /// <Summary>
+    /// Remove controller ability
+    /// </Summary>
     private void BeginGameOver()
     {
-        Debug.Log("Dead");
         GameManager.Instance.SetPlayerDead();
     }
 }

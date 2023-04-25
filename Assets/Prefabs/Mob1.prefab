@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _commandInput: {fileID: 2957985487184468699}
-  _speed: 3
+  _speed: 4
+  _chargeSpeed: 6
 --- !u!114 &7383803489319153987
 MonoBehaviour:
   m_ObjectHideFlags: 0

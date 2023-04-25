@@ -28,6 +28,15 @@ public class MoveCommand : ICommand
         Vector3 worldVelocity = _moveDir;
         if (_isometric) worldVelocity = _unitBody.transform.TransformDirection(_moveDir);
 
+        // Raycast check walls
+        Vector3 bodyCenter = new Vector3(_unitBody.position.x, 1f, _unitBody.position.z);
+        Ray ray = new Ray(bodyCenter, worldVelocity);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, (float)_speed * Time.deltaTime, LayerMask.GetMask("Solid")))
+        {
+            worldVelocity = Vector2.zero;
+        }
+
         _unitBody.MovePosition(_unitBody.position + worldVelocity * _speed * Time.deltaTime);
     }
 }
