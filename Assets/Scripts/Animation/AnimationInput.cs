@@ -38,6 +38,8 @@ public class AnimationInput : MonoBehaviour
 
     private void Update()
     {
+        _animator.transform.LookAt(_animator.transform.position + (_animator.transform.position - Camera.main.transform.position));
+
         int state = GetState(_commandInput.GetDir());
         
         if (state != _lastAnimation)

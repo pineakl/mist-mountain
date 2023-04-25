@@ -18,7 +18,6 @@ public class MeleeInput : MonoBehaviour
     {
         if (_commandInput.GetFire())
         {
-            Debug.Log("Hit");
             ICommand storedShootCommand = new ShootCommand(_targetData.UnitTransform);
             _invoker.AddCommand(storedShootCommand);
         }

@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private bool _playerIsAlive;
     private int _scores;
 
+    private float _baseSpawnTimer = 2f;
+    private int _wave = 1;
+
     private void Awake()
     {
         _instance = this;
@@ -27,7 +30,20 @@ public class GameManager : MonoBehaviour
         _playerIsAlive = true;
 
         //  Start spawning enemy every x seconds.
-        InvokeRepeating("Spawn", 3f, 1.5f);
+        InvokeRepeating("Spawn", 3f, _baseSpawnTimer);
+    }
+
+    private void Update()
+    {
+        int nextWave = 1 + (_scores / 1000);
+        if (_wave != nextWave)
+        {
+            _wave = nextWave;
+            CancelInvoke("Spawn");
+            float spawnTime = _baseSpawnTimer - (0.5f * (_wave - 1));
+            if (spawnTime < 0.5f) spawnTime = 0.5f;
+            InvokeRepeating("Spawn", 0f, spawnTime);
+        }
     }
 
     /// <Summary>
@@ -70,8 +86,18 @@ public class GameManager : MonoBehaviour
     /// </Summary>
     public void SetPlayerDead()
     {
+        CancelInvoke("Spawn");
         _cameraBoxVolume.localPosition = Vector3.zero;
         _playerIsAlive = false;
+        SaveScore();
+    }
+
+    private void SaveScore()
+    {
+        if (_scores > PlayerPrefs.GetInt("MidnightMoonCanyon_HighScore"))
+        {
+            PlayerPrefs.SetInt("MidnightMoonCanyon_HighScore", _scores);
+        }
     }
 
     /// <Summary>
@@ -80,6 +106,14 @@ public class GameManager : MonoBehaviour
     public int GetScores()
     {
         return _scores;
+    }
+
+    /// <Summary>
+    /// Get current wave
+    /// </Summary>
+    public int GetWave()
+    {
+        return _wave;
     }
 
     /// <Summary>

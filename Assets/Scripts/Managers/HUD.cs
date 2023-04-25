@@ -10,6 +10,7 @@ public class HUD : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _textLives;
     [SerializeField] private TextMeshProUGUI _textScores;
+    [SerializeField] private TextMeshProUGUI _textWaves;
 
     [SerializeField] private Transform _gameOverContainer;
     private bool _gameOver;
@@ -23,6 +24,7 @@ public class HUD : MonoBehaviour
     {
         UpdateTextLives();
         UpdateScores();
+        UpdateWave();
 
         ShowGameOver();
     }
@@ -35,6 +37,11 @@ public class HUD : MonoBehaviour
     private void UpdateScores()
     {
         _textScores.text = GameManager.Instance.GetScores().ToString();
+    }
+
+    private void UpdateWave()
+    {
+        _textWaves.text = "WAVE " + GameManager.Instance.GetWave();
     }
 
     private void ShowGameOver()

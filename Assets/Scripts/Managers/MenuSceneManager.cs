@@ -7,6 +7,7 @@ using TMPro;
 public class MenuSceneManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _blinkingText;
+    [SerializeField] private TextMeshProUGUI _highscoreText;
     [SerializeField] private AudioSource _source;
 
     private bool _click;
@@ -16,6 +17,11 @@ public class MenuSceneManager : MonoBehaviour
         //  Start blinking text
         InvokeRepeating("ToggleBlink", 0f, 0.5f);
     }
+
+    private void Start()
+    {
+        _highscoreText.text = "HIGH SCORE : " + PlayerPrefs.GetInt("MidnightMoonCanyon_HighScore");
+}
 
     private void Update()
     {
