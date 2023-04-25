@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player Data SO
   m_EditorClassIdentifier: 
   Mutable: 1
+  MaxHealth: 7
   Health: 7
   UnitTransform: {fileID: 0}
-  UnitPosition: {x: 0.2859831, y: 0.2, z: -0.301517}
+  UnitPosition: {x: -0.69477737, y: 0.2, z: 4.1449447}

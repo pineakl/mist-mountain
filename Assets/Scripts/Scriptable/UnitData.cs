@@ -6,6 +6,7 @@ using UnityEngine;
 public class UnitData : ScriptableObject
 {
     public bool Mutable = true;
+    public int MaxHealth;
     public int Health;
     [HideInInspector] public Transform UnitTransform;
     [HideInInspector] public Vector3 UnitPosition;

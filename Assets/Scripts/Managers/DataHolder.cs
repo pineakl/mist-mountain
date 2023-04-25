@@ -21,7 +21,8 @@ public class DataHolder : MonoBehaviour
 
     private void ResetValue()
     {
-        _health = _unitDataObject.Health;
+        _health = _unitDataObject.MaxHealth;
+        _unitDataObject.Health = _unitDataObject.MaxHealth;
         DeathFlag = false;
         _unitDataObject.UnitTransform = transform;
         if (_unitDataObject.Mutable) _unitDataObject.UnitPosition = transform.position;

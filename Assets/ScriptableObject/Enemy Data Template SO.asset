@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Enemy Data Template SO
   m_EditorClassIdentifier: 
   Mutable: 0
+  MaxHealth: 3
   Health: 3
   UnitTransform: {fileID: 0}
   UnitPosition: {x: -2.934704, y: 0.2, z: -10.999237}
